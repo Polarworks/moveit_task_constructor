@@ -90,9 +90,12 @@ static uint DISPLAY_COUNT = 0;
 TaskPanel::TaskPanel(QWidget* parent) : rviz_common::Panel(parent), d_ptr(new TaskPanelPrivate(this)) {
 	Q_D(TaskPanel);
 
-	// sync checked tool button with displayed widget
-	connect(d->tool_buttons_group, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), d->stackedWidget,
+	// sync checked tool button with displayed widQOverload<int>::of(&QButtonGroup::buttonClicked)
+
+	connect(d->tool_buttons_group, QOverload<int>::of(&QButtonGroup::buttonClicked), d->stackedWidget,
 	        [d](int index) { d->stackedWidget->setCurrentIndex(index); });
+	// connect(d->tool_buttons_group, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), d->stackedWidget,
+	//         [d](int index) { d->stackedWidget->setCurrentIndex(index); });
 	connect(d->stackedWidget, &QStackedWidget::currentChanged, d->tool_buttons_group,
 	        [d](int index) { d->tool_buttons_group->button(index)->setChecked(true); });
 
