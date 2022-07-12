@@ -91,7 +91,7 @@ TaskPanel::TaskPanel(QWidget* parent) : rviz_common::Panel(parent), d_ptr(new Ta
 	Q_D(TaskPanel);
 
 	// sync checked tool button with displayed widQOverload<int>::of(&QButtonGroup::buttonClicked)
-
+	// maybe ? patch https://doc.qt.io/qt-5/qbuttongroup-obsolete.html#buttonClicked-1 
 	connect(d->tool_buttons_group, QOverload<int>::of(&QButtonGroup::buttonClicked), d->stackedWidget,
 	        [d](int index) { d->stackedWidget->setCurrentIndex(index); });
 	// connect(d->tool_buttons_group, static_cast<void (QButtonGroup::*)(int)>(&QButtonGroup::idClicked), d->stackedWidget,
